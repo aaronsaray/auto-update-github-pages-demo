@@ -26,5 +26,4 @@ jobs:
       uses: EndBug/add-and-commit@v7
       with:
         add: 'data.json'
-        default_author: user_info
         message: 'Updated spot price data.json file'
