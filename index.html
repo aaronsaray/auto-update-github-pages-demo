@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Silver Spot Price</title>
+    <style>
+        body {
+            background-color: #252526;
+            color: #eeeeee;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        h1 {
+            font-weight: 300;
+            font-size: 2.8rem;
+            margin: 10vh 0 0 0;
+        }
+
+        h2 {
+            font-weight: 100;
+            margin: 0.5rem 0 0 0;
+            font-size: 0.9rem;
+            font-style: italic;
+            color: #d4d5d9;
+        }
+
+        #price {
+            margin-top: 2rem;
+            font-size: 7rem;
+            font-weight: 100;
+        }
+
+        #price sup {
+            font-size: 3rem;
+            color: #a3a9af;
+        }
+
+        #price data {
+            color: #ffffff;
+            text-shadow: 0 0 20px #45d0ff;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Silver Spot Price</h1>
+    <h2>as of <time>loading...</time> local time</h2>
+    <div id="price">
+        <sup>$</sup><data>loading...</data>
+    </div>
+
+    <script>
+        fetch('data.json').then(res => res.json()).then(rows => {
+            const data = {};
+            rows.forEach(row => {
+                const key = Object.keys(row)[0];
+                data[key] = row[key];
+            });
+
+            return data;
+        }).then(results => {
+            const lastUpdated = new Date(results.timestamp);
+            const updatedSpot = parseFloat(results.silver).toFixed(2);
+
+            document.querySelector('time').innerText = lastUpdated.toLocaleDateString() + ' ' + lastUpdated.toLocaleTimeString();
+            document.querySelector('data').innerText = updatedSpot;
+        });
+    </script>
+</body>
+
+</html>
