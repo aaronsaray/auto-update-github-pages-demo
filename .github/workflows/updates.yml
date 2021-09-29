@@ -13,9 +13,16 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Fetch data
+      id: myRequest
       uses: fjogeleit/http-request-action@master
       with:
         url: 'https://api.metals.live/v1/spot'
       
     - name: Show Response
       run: echo ${{ steps.myRequest.outputs.response }}
+
+    - name: Update data file
+      run: echo '${{ steps.myRequest.outputs.response }}' > data.json
+
+    - name: display data.json content
+      run: cat data.json
