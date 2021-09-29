@@ -1,0 +1,21 @@
+name: Price Retrieval
+
+on:
+  schedule:
+    - cron: '0 6 * * *'
+  
+jobs:
+  update:
+    runs-on: ubuntu-latest;
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Fetch data
+      uses: gautemo/fetch-api-data-action@1.0.2
+      with:
+        file: 'data.json'
+        url: 'https://api.metals.live/v1/spot'
+      
+    - name: show content
+      run: cat data.json
