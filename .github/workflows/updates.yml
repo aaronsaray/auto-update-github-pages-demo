@@ -1,6 +1,7 @@
 name: Price Retrieval
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: '0 6 * * *'
   
@@ -10,7 +11,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    
+
     - name: Fetch data
       uses: gautemo/fetch-api-data-action@1.0.2
       with:
