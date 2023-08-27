@@ -2,8 +2,9 @@ name: Price Retrieval
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '0 6 * * *'
+# The third party service is no longer available.
+#  schedule:
+#    - cron: '0 6 * * *'
   
 jobs:
   update:
